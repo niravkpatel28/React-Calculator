@@ -1,2 +1,2 @@
 # React-Calculator
-Creates a simple calculator with basic mathematical operations
+Creates a simple calculator with basic mathematical operations.
