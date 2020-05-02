@@ -44,11 +44,12 @@ class App extends React.Component{
     
     try {
       let checkResult = eval(this.state.result);
+      // console.log(typeof(checkResult)) // the result is a number
       this.setState({
-        result:checkResult,
+        result:checkResult.toString(),
         evaluated:true
       })
-    }catch(e){
+    }catch(error){
       this.setState({
         result:"Error",
         evaluated:true
@@ -60,9 +61,13 @@ class App extends React.Component{
 
   backSpace = ()=>{
     // remove last element from the string
-    this.setState({
-      result:this.state.result.slice(0,-1)
-    })
+    // Prevent backspace from editing the calcualted value
+    // if evaluation is done, no changes can be made.
+    if(!this.state.evaluated){
+      this.setState({
+        result:this.state.result.slice(0,-1)
+      })
+    } 
   }
 
   clearInput = ()=>{
@@ -72,17 +77,29 @@ class App extends React.Component{
     })
   }
 
+  directInput = (e)=>{
+    // allow user to directly input mathematical expression
+    this.setState({
+      result:e.target.value
+    })
+  }
   render(){
     return (
       <div>
         <h1> Calculator App </h1>
-        <Display result ={this.state.result} onClick={this.onClick}/>
+        <Display 
+          result ={this.state.result} 
+          onClick={this.onClick}
+          directInput={this.directInput}
+          calculate={this.calculate}/>
+
         <br/>
         <KeyPad 
           onClick={this.onClick} 
           calculate={this.calculate} 
           backSpace={this.backSpace}
-          clearInput = {this.clearInput}/>
+          clearInput={this.clearInput}
+          />
       </div>
     );
   }
