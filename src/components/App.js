@@ -3,10 +3,6 @@ import KeyPad from './KeyPad';
 import Display from './Display';
 
 class App extends React.Component{
-  onClick = ()=>{
-    console.log('button is pressed');
-  }
-
   state={
     result:'',
     evaluated: false
@@ -14,7 +10,7 @@ class App extends React.Component{
 
   onClick=(e)=>{
 
-      console.log(this.state)
+      // console.log(this.state)
       switch(e.target.value){
         case '+':
         case '-':
