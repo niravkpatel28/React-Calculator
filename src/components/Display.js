@@ -12,7 +12,13 @@ class Display extends React.Component{
         return(
             <input 
                 value={this.props.result}  
-                type="text" onChange={this.props.onClick}
+                type="text" 
+                onChange={this.props.directInput}
+                onKeyDown = {(e)=>{
+                    if(e.key==="Enter"){
+                        this.props.calculate()
+                    }
+                }}
                 style={style}
                 />
         )
